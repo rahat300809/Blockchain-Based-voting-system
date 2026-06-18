@@ -2,9 +2,12 @@
 #include "core.cpp"
 #undef main
 
-int main() {
+int main()
+{
     Blockchain bc;
     bc.load_blockchain();
 
     admin_panel(bc);
+
+    return 0;
 }

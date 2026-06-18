@@ -2,35 +2,47 @@
 #include "core.cpp"
 #undef main
 
-int main() {
+int main()
+{
     Blockchain bc;
 
-    while (true) {
-        // ALWAYS REFRESH BEFORE ANY ACTION
+    while(true)
+    {
         bc.load_blockchain();
 
-        cout << "\n==============================================" << endl;
-        cout << "       VOTER TERMINAL" << endl;
-        cout << "==============================================" << endl;
-        cout << "1. Voter Registration (Create Account)" << endl;
-        cout << "2. Voter Login (Vote)" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Choice: ";
+        cout<<"\n=============================================="<<endl;
+        cout<<"           VOTER TERMINAL"<<endl;
+        cout<<"=============================================="<<endl;
+        cout<<"1. Register (Create Voter Account)"<<endl;
+        cout<<"2. Login   (Cast Your Vote)"<<endl;
+        cout<<"3. Exit"<<endl;
+        cout<<"Choice: ";
 
         int choice;
-        cin >> choice;
+        if(!(cin>>choice))
+        {
+            cin.clear();
+            cin.ignore(10000,'\n');
+            cout<<">>> Enter 1, 2, or 3."<<endl;
+            continue;
+        }
 
-        // REFRESH AGAIN (important)
-        bc.load_blockchain();
-
-        if (choice == 1) {
+        if(choice==1)
+        {
             user_registration(bc);
         }
-        else if (choice == 2) {
-            user_login(bc);  // untouched
+        else if(choice==2)
+        {
+            user_login(bc);
         }
-        else if (choice == 3) {
+        else if(choice==3)
+        {
+            cout<<">>> Goodbye."<<endl;
             break;
+        }
+        else
+        {
+            cout<<">>> Invalid option."<<endl;
         }
     }
 
