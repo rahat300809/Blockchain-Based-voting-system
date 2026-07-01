@@ -370,8 +370,8 @@
               <h1 class="hero-title" id="hero-heading">
                 The <span class="gradient">Unbreakable</span><br>Voting System
               </h1>
-              <p class="hero-desc" style="max-width: 540px; margin-bottom: 32px;">
-                An unbreakable, decentralized platform for digital democracy. Every ballot is cryptographically sealed, chained sequentially, and verified across P2P networks in real-time with absolute voter privacy. Zero trust — Zero compromise.
+              <p class="hero-desc" style="max-width: 540px; margin-bottom: 32px; line-height: 1.7; font-size: 1rem; color: var(--c-text-dim);">
+                🛡️ <strong>Cast your vote without fear!</strong> Your voter credentials are fully encrypted using military-grade security, your identity is kept 100% anonymous, and your ballot is sealed permanently on the blockchain. This system is entirely secure, transparent, and <strong>completely proxy-proof</strong>—ensuring only your voice is counted.
               </p>
               <div style="display: flex; gap: 16px;">
                 <a href="#terminals-heading" class="btn btn-primary btn-lg" style="display: inline-flex; align-items: center; gap: 8px;">
@@ -646,16 +646,9 @@
         const r = await api.get('/api/state');
         if (r.ok) {
           const s = r.state;
-          document.getElementById('statVotesCast').textContent = s.votesCast ?? '0';
-          document.getElementById('statCandidates').textContent = s.candidates?.length ?? '0';
-          document.getElementById('statRegistered').textContent = s.registeredCount ?? '0';
           
           // Render dynamic donut chart + legend data
           renderDonutTally(s.votes || {});
-        }
-        const h = await api.get('/api/health');
-        if (h.ok) {
-          document.getElementById('statClients').textContent = h.clients ?? '0';
         }
       } catch (e) { /* server may not be running yet */ }
     }
@@ -679,16 +672,23 @@
         segmentsGroup.innerHTML = `
           <circle cx="18" cy="18" r="15.915" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3" stroke-dasharray="100 0"></circle>
         `;
+        const equalPct = Math.round(100 / Object.keys(votes).length);
         legendGroup.innerHTML = Object.keys(votes).map((name, idx) => {
           const colors = ['#60a5fa', '#34d399', '#f59e0b', '#c084fc', '#f43f5e', '#06b6d4'];
           const color = colors[idx % colors.length];
           return `
-            <div class="legend-item" style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem;">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="width: 8px; height: 8px; border-radius: 50%; background: ${color}; display: inline-block;"></span>
-                <span style="font-weight: 600; color: #fff;">${name}</span>
+            <div class="legend-item" style="display: flex; flex-direction: column; gap: 4px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: ${color}; display: inline-block;"></span>
+                  <span style="font-weight: 600; color: #fff;">${name}</span>
+                </div>
+                <div style="font-family: var(--font-mono); color: var(--c-text-muted);">0 votes (0%)</div>
               </div>
-              <div style="font-family: var(--font-mono); color: var(--c-text-muted);">0 votes (0%)</div>
+              <div style="font-size: 0.68rem; color: var(--c-text-muted); display: flex; align-items: center; gap: 4px; padding-left: 16px;">
+                <span>🔮 Win Prediction:</span>
+                <span style="font-weight: 700; color: var(--c-text-muted);">${equalPct}% chance</span>
+              </div>
             </div>
           `;
         }).join('');
@@ -697,6 +697,7 @@
       
       let accum = 100;
       const colors = ['#60a5fa', '#34d399', '#f59e0b', '#c084fc', '#f43f5e', '#06b6d4'];
+      const maxVotes = Math.max(...Object.values(votes));
       
       let segmentsHtml = '';
       let legendHtml = '';
@@ -713,6 +714,10 @@
         `;
         accum -= pct;
         
+        const isLeader = count === maxVotes && count > 0;
+        const winProbText = isLeader ? '🏆 Frontrunner' : '📉 Trailing';
+        const winProbVal = Math.round(pct);
+        
         // Legend data
         legendHtml += `
           <div class="legend-item" style="display: flex; flex-direction: column; gap: 4px;">
@@ -725,6 +730,10 @@
             </div>
             <div style="width: 100%; height: 5px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden;">
               <div style="width: ${pct}%; height: 100%; background: ${color}; border-radius: 3px;"></div>
+            </div>
+            <div style="font-size: 0.68rem; color: var(--c-text-muted); display: flex; align-items: center; gap: 4px; padding-left: 16px;">
+              <span>🔮 Win Prediction:</span>
+              <span style="font-weight: 700; color: ${isLeader ? 'var(--c-success)' : 'var(--c-text-muted)'};">${winProbVal}% chance (${winProbText})</span>
             </div>
           </div>
         `;
