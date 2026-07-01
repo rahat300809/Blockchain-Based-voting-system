@@ -180,6 +180,9 @@
           <button class="sidebar-btn" id="nav-audit" onclick="showPanel('audit')">
             <span class="s-icon" aria-hidden="true">📜</span> Audit Ledger
           </button>
+          <button class="sidebar-btn" id="nav-tech" onclick="showPanel('tech')">
+            <span class="s-icon" aria-hidden="true">🛠️</span> Technology Used
+          </button>
           <div class="sidebar-divider"></div>
           <div class="sidebar-danger">
             <button class="sidebar-btn" id="nav-reset" onclick="showPanel('reset')">
@@ -403,6 +406,61 @@
                 </div>
               </div>
               <div id="resetAlert" class="mt-lg" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- Panel: Technology Used -->
+          <div class="panel" id="panel-tech">
+            <div class="card role-admin">
+              <div class="card-header">
+                <div class="card-icon role-admin" aria-hidden="true">🛠️</div>
+                <div>
+                  <div class="card-title">Technology Stack</div>
+                  <div class="card-subtitle">Technologies powering the BlockVote platform and their purpose</div>
+                </div>
+              </div>
+              
+              <div class="alert alert-info mb-md" style="margin-top: 16px">
+                <span class="alert-icon" aria-hidden="true">💡</span>
+                <div>Here is the breakdown of tools, frameworks, and protocols powering the unbreakable blockchain voting platform:</div>
+              </div>
+              
+              <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 24px">
+                <div class="card" style="background: rgba(0,0,0,0.2); border: 1px solid var(--c-border); padding: 16px;">
+                  <div style="font-weight: 700; color: var(--c-primary); margin-bottom: 4px;">Node.js & Express API Backend</div>
+                  <div style="font-size: 0.85rem; color: var(--c-text-muted);">Serves the REST API endpoints and handles the WebSocket server logic, request validation, static assets serving, and CORS security.</div>
+                </div>
+                
+                <div class="card" style="background: rgba(0,0,0,0.2); border: 1px solid var(--c-border); padding: 16px;">
+                  <div style="font-weight: 700; color: var(--c-success); margin-bottom: 4px;">Pure JavaScript Blockchain Engine (`blockchain-core.js`)</div>
+                  <div style="font-size: 0.85rem; color: var(--c-text-muted);">Maintains the cryptographically secure blockchain, executes Proof-of-Work block mining, implements AES-256-CBC file database encryption, and handles voter registrations/tamper verification.</div>
+                </div>
+                
+                <div class="card" style="background: rgba(0,0,0,0.2); border: 1px solid var(--c-border); padding: 16px;">
+                  <div style="font-weight: 700; color: #a855f7; margin-bottom: 4px;">C++ Core Legacy Alignment (`core.cpp`)</div>
+                  <div style="font-size: 0.85rem; color: var(--c-text-muted);">Maintains historical algorithm alignment; the Node.js backend dynamically reads and parses structural configurations from C++ source files directly.</div>
+                </div>
+                
+                <div class="card" style="background: rgba(0,0,0,0.2); border: 1px solid var(--c-border); padding: 16px;">
+                  <div style="font-weight: 700; color: #f59e0b; margin-bottom: 4px;">Fly.io Cloud Infrastructure</div>
+                  <div style="font-size: 0.85rem; color: var(--c-text-muted);">Hosts the API backend dynamically inside a Docker container with an attached persistent SSD volume to persist database records 24/7.</div>
+                </div>
+                
+                <div class="card" style="background: rgba(0,0,0,0.2); border: 1px solid var(--c-border); padding: 16px;">
+                  <div style="font-weight: 700; color: #3b82f6; margin-bottom: 4px;">Firebase Hosting</div>
+                  <div style="font-size: 0.85rem; color: var(--c-text-muted);">Deploys and hosts the fast, globally distributed static frontend client interface (HTML, CSS, JS) at blockchain300809.web.app.</div>
+                </div>
+                
+                <div class="card" style="background: rgba(0,0,0,0.2); border: 1px solid var(--c-border); padding: 16px;">
+                  <div style="font-weight: 700; color: #10b981; margin-bottom: 4px;">WebSockets (WS/WSS Protocol)</div>
+                  <div style="font-size: 0.85rem; color: var(--c-text-muted);">Enables instant, real-time sync between client terminals, the live results dashboard tally, and the public blockchain ledger without needing manual reloads.</div>
+                </div>
+                
+                <div class="card" style="background: rgba(0,0,0,0.2); border: 1px solid var(--c-border); padding: 16px;">
+                  <div style="font-weight: 700; color: #ec4899; margin-bottom: 4px;">AES-256-CBC & SHA-256 Cryptography</div>
+                  <div style="font-size: 0.85rem; color: var(--c-text-muted);">Natively validates cryptographic signatures, hashes blocks using SHA-256 for chain integrity, encrypts stored voting database files using AES-256, and generates highly secure 6-digit verification OTP codes.</div>
+                </div>
+              </div>
             </div>
           </div>
 
