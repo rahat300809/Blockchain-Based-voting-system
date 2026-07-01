@@ -381,8 +381,22 @@
                   <div class="card-subtitle">Real-time vote distribution from the blockchain</div>
                 </div>
               </div>
-              <div id="resultsContainer" class="results-container mt-lg" style="margin-top: 24px">
-                <div class="text-muted" style="font-size:0.875rem">No votes recorded yet. Loading...</div>
+              <div class="tally-layout" style="display: grid; grid-template-columns: 140px 1fr; gap: 24px; align-items: center; margin-top: 24px;">
+                <!-- Left: Graph Diagram -->
+                <div class="chart-wrapper" style="position: relative; width: 140px; height: 140px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: rgba(255,255,255,0.02); border-radius: 50%; padding: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                  <svg id="donutChart" viewBox="0 0 36 36" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+                    <circle cx="18" cy="18" r="15.915" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="3"></circle>
+                    <g id="donutSegments"></g>
+                  </svg>
+                  <div style="position: absolute; text-align: center;">
+                    <div id="chartTotalVotes" style="font-size: 1.6rem; font-weight: 850; font-family: var(--font-mono); color: #fff; line-height: 1.1;">0</div>
+                    <div style="font-size: 0.58rem; color: var(--c-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">Votes</div>
+                  </div>
+                </div>
+                <!-- Right: Data of Vote Counts -->
+                <div id="resultsContainer" class="results-container" style="display: flex; flex-direction: column; gap: 14px; width: 100%;">
+                  <div class="text-muted" style="font-size:0.875rem">No votes recorded yet. Loading...</div>
+                </div>
               </div>
             </div>
 
@@ -474,44 +488,47 @@
             </div>
           </div>
         </section>
+    </div>
+  </main>
 
-        <!-- Developer Profile Card -->
-        <section class="section" style="margin-bottom: 64px; text-align: center;">
-          <div class="card" style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, rgba(30,41,59,0.5), rgba(15,23,42,0.8)); border: 1px solid rgba(255,255,255,0.08); padding: 40px; position: relative; overflow: hidden; border-radius: var(--r-xl);">
-            <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: rgba(59,130,246,0.1); filter: blur(50px); border-radius: 50%;"></div>
-            <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--c-primary); font-weight: 700; margin-bottom: 12px;">Lead Developer</div>
-            <h3 style="font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; color: #fff;">Rahat Mahamud</h3>
-            <p style="font-size: 0.9rem; color: var(--c-text-muted); margin-bottom: 4px;">Department of Computer Science & Engineering</p>
-            <p style="font-size: 0.85rem; color: var(--c-text-dim); margin-bottom: 24px;">Daffodil International University</p>
-            
-            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-              <a href="https://protfolio3.web.app/" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
-                🌐 Portfolio
-              </a>
-              <a href="https://github.com/rahat300809" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--c-border);">
-                🐙 GitHub
-              </a>
-              <a href="https://www.linkedin.com/in/rahat300809" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--c-border);">
-                💼 LinkedIn
-              </a>
-            </div>
-          </div>
-        <!-- Spacer -->
-        <div style="margin-bottom: 32px;"></div>
-
+  <footer style="border-top: 1px solid var(--c-border); padding: 48px 0; background: rgba(3, 7, 18, 0.6); backdrop-filter: blur(10px); color: var(--c-text-muted); font-size: 0.85rem; margin-top: 64px; position: relative; z-index: 10;">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px;">
+      
+      <!-- Left: Dev Info with Circle Image -->
+      <div style="display: flex; align-items: center; gap: 16px; min-width: 280px;">
+        <div style="position: relative; width: 64px; height: 64px; border-radius: 50%; overflow: hidden; border: 2px solid var(--c-primary); flex-shrink: 0; box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);">
+          <img src="/img/rahat.jpg" alt="Rahat Mahamud" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div>
+          <div style="font-weight: 800; color: #fff; font-size: 1.05rem; letter-spacing: -0.02em;">Rahat Mahamud</div>
+          <div style="font-size: 0.78rem; color: var(--c-text-muted);">Computer Science & Engineering</div>
+          <div style="font-size: 0.72rem; color: var(--c-text-dim);">Daffodil International University</div>
+        </div>
       </div>
-    </main>
 
-    <footer>
-      <div class="container">
-        <p>
-          <span class="footer-brand">BlockVote v2.0</span> — 
-          AES-256 Encrypted · SHA-256 Blockchain · WebSocket Real-Time · 
-          &copy; <span id="year"></span> Blockchain Voting System
-        </p>
+      <!-- Center: Brand & Version -->
+      <div style="text-align: center; font-size: 0.78rem;">
+        <span style="color: var(--c-primary); font-weight: 700;">BlockVote Cloud Platform v3.0</span><br>
+        An Unbreakable, Decentralized Voting Solution<br>
+        &copy; <span id="year"></span> All Rights Reserved.
       </div>
-    </footer>
-  </div>
+
+      <!-- Right: Social Links -->
+      <div style="display: flex; gap: 10px;">
+        <a href="https://protfolio3.web.app/" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--c-border); padding: 8px 14px; font-size: 0.75rem; border-radius: var(--r-md); transition: all 0.2s;">
+          🌐 Portfolio
+        </a>
+        <a href="https://github.com/rahat300809" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--c-border); padding: 8px 14px; font-size: 0.75rem; border-radius: var(--r-md); transition: all 0.2s;">
+          🐙 GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/rahat300809" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--c-border); padding: 8px 14px; font-size: 0.75rem; border-radius: var(--r-md); transition: all 0.2s;">
+          💼 LinkedIn
+        </a>
+      </div>
+
+    </div>
+  </footer>
+</div>
 
   <script src="/js/config.js?v=5.0.1"></script>
   <script src="/js/websocket-client.js?v=5.0.1"></script>
@@ -532,14 +549,88 @@
           document.getElementById('statCandidates').textContent = s.candidates?.length ?? '0';
           document.getElementById('statRegistered').textContent = s.registeredCount ?? '0';
           
-          // Render results bars
-          ui.renderVoteBars('resultsContainer', s.votes || {});
+          // Render dynamic donut chart + legend data
+          renderDonutTally(s.votes || {});
         }
         const h = await api.get('/api/health');
         if (h.ok) {
           document.getElementById('statClients').textContent = h.clients ?? '0';
         }
       } catch (e) { /* server may not be running yet */ }
+    }
+
+    function renderDonutTally(votes) {
+      const total = Object.values(votes).reduce((a, b) => a + b, 0);
+      document.getElementById('chartTotalVotes').textContent = total;
+      
+      const segmentsGroup = document.getElementById('donutSegments');
+      const legendGroup = document.getElementById('resultsContainer');
+      
+      if (!votes || Object.keys(votes).length === 0) {
+        segmentsGroup.innerHTML = `
+          <circle cx="18" cy="18" r="15.915" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3" stroke-dasharray="100 0"></circle>
+        `;
+        legendGroup.innerHTML = '<div class="text-muted" style="font-size:0.875rem">No candidates registered.</div>';
+        return;
+      }
+      
+      if (total === 0) {
+        segmentsGroup.innerHTML = `
+          <circle cx="18" cy="18" r="15.915" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3" stroke-dasharray="100 0"></circle>
+        `;
+        legendGroup.innerHTML = Object.keys(votes).map((name, idx) => {
+          const colors = ['#60a5fa', '#34d399', '#f59e0b', '#c084fc', '#f43f5e', '#06b6d4'];
+          const color = colors[idx % colors.length];
+          return `
+            <div class="legend-item" style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: ${color}; display: inline-block;"></span>
+                <span style="font-weight: 600; color: #fff;">${name}</span>
+              </div>
+              <div style="font-family: var(--font-mono); color: var(--c-text-muted);">0 votes (0%)</div>
+            </div>
+          `;
+        }).join('');
+        return;
+      }
+      
+      let accum = 100;
+      const colors = ['#60a5fa', '#34d399', '#f59e0b', '#c084fc', '#f43f5e', '#06b6d4'];
+      
+      let segmentsHtml = '';
+      let legendHtml = '';
+      
+      Object.entries(votes).forEach(([name, count], idx) => {
+        const pct = (count / total) * 100;
+        const color = colors[idx % colors.length];
+        
+        // Donut arc segment
+        segmentsHtml += `
+          <circle cx="18" cy="18" r="15.915" fill="none" stroke="${color}" stroke-width="3" 
+            stroke-dasharray="${pct} ${100 - pct}" stroke-dashoffset="${accum}" stroke-linecap="round"
+            style="transition: stroke-dashoffset 0.5s ease-in-out;"></circle>
+        `;
+        accum -= pct;
+        
+        // Legend data
+        legendHtml += `
+          <div class="legend-item" style="display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 8px; height: 8px; border-radius: 50%; background: ${color}; display: inline-block;"></span>
+                <span style="font-weight: 600; color: #fff;">${name}</span>
+              </div>
+              <div style="font-family: var(--font-mono); font-weight: 700; color: ${color};">${count} votes (${Math.round(pct)}%)</div>
+            </div>
+            <div style="width: 100%; height: 5px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden;">
+              <div style="width: ${pct}%; height: 100%; background: ${color}; border-radius: 3px;"></div>
+            </div>
+          </div>
+        `;
+      });
+      
+      segmentsGroup.innerHTML = segmentsHtml;
+      legendGroup.innerHTML = legendHtml;
     }
 
     // Load ledger content
